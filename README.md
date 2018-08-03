@@ -1,6 +1,6 @@
 # BIE_ecaf
 
-Boundary integral code to compute a perfectly conducting core-annular viscous thread subject to a radial electric field.
+Boundary integral code to compute a perfectly conducting core-annular (axisymmetric case) viscous thread subject to a radial electric field.
 
 The code only works for viscosity ratio \lambda = 1 but qualitatively captured the behavior of the system.
 
