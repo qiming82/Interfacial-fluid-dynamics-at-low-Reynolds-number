@@ -1,4 +1,4 @@
-# Boundary element method 
+# Boundary element method for axisymmetric periodic Laplace and Stokes
 
 Boundary integral code to compute a perfectly conducting core-annular (axisymmetric case two phase flow at low Reynolds number) viscous thread subject to a radial electric field.
 
