@@ -4,7 +4,7 @@
 c
 c
       implicit double precision (a-h,o-z)
-	parameter(neq=1024)
+	parameter(neq=1024*2)
 
 	dimension z(neq),r(neq),znew(neq),rnew(neq),s(neq),snew(neq)
 	dimension dz(neq),dr(neq),ds(neq),dzg(neq),drg(neq),dsg(neq)
@@ -12,10 +12,8 @@ c
 	dimension T(neq),xg(10),wg(10),sg(10),err(neq)
 
       pi=4*datan(1.d0)
-	eps=0.0000001D0
+	eps=0.000000001D0
       m=6
-	RL=1.D0
-
       call Gauss_Legendre (m,xg,wg)
       
 	errorflag=1.D0
@@ -24,7 +22,7 @@ c
       
 	do j=1,N
 	   T(j)=dsqrt((z(j+1)-z(j))**2+(r(j+1)-r(j))**2)
-         s(j+1)=s(j)+T(j)*2.D0/RL
+         s(j+1)=s(j)+T(j)/pi
       end do
       
 	kk=1
@@ -34,19 +32,19 @@ c
      +  (N
      +  ,s,r
      +  ,0.0D0
-     +  ,0.0D0
+     +  ,-pi
      +  ,ar,br,cr
      +  )
           call splc_clm
      +  (N
      +  ,s,z
-     +  ,RL/2.D0
-     +  ,RL/2.D0
+     +  ,pi
+     +  ,0.0D0
      +  ,az,bz,cz
      +  )
 
-	    cz(N+1)=RL/2.D0
-	    cr(N+1)=0.0D0
+	    cz(N+1)=0.0D0
+	    cr(N+1)=-pi
 
 c	    do j=1,N+1
 c	       dr(j)=cr(j)
@@ -69,7 +67,7 @@ c --- compute the arclength using the new spline
 	           dsg(k) = dsqrt(drg(k)**2+dzg(k)**2)
 	           sum = sum + a*dsg(k)*wg(k)
 	       end do
-	       snew(j+1)=snew(j)+sum*2.D0/RL
+	       snew(j+1)=snew(j)+sum/pi
 	     end do
 c----  check convergence	
 	     do j=1,N+1
@@ -79,29 +77,28 @@ c----  check convergence
 	     s(1:N+1)=snew(1:N+1)
 
 	    kk = kk +1
-	     if(kk.gt.50) then
+	     if(kk.gt.80) then
 	         write(*,*)'iteration fails...'
 	          exit
 	      end if
       end do
-
           call splc_clm
      +  (N
      +  ,s,r
      +  ,0.0D0
-     +  ,0.0D0
+     +  ,-pi
      +  ,ar,br,cr
      +  )
           call splc_clm
      +  (N
      +  ,s,z
-     +  ,RL/2.D0
-     +  ,RL/2.D0
+     +  ,pi
+     +  ,0.0D0
      +  ,az,bz,cz
      +  )
 
-	    cr(N+1)=0.0D0
-	    cz(N+1)=RL/2.D0
+	    cz(N+1)=0.0D0
+	    cr(N+1)=-pi
 c---- done
 
       return
