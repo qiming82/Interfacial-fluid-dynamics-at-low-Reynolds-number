@@ -1,0 +1,7 @@
+ neck too small, pinching
+ rmin=                       NaN
+ stop time is    1.008170958689017     
+ dt=   8.6316745750311004E-006 rmin                       NaN
+ eb=    0.000000000000000      d=    1.500000000000000     
+ ka=   0.5000000000000000     
+ lambda=    1.000000000000000     
