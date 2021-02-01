@@ -23,6 +23,8 @@ pages = {013201}
 Year = {2021}
 }
 
+![](drop_pinchoff.png)
+
 
 
 2. in folder 'caff', the code is used to simulate conducting core annular flow in Stokes flow
